@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Will force it to attach a player controller!
+// Will force it to attach these to the player!
 [RequireComponent (typeof (PlayerController))]
+[RequireComponent (typeof (GunController))]
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5;
@@ -12,16 +13,20 @@ public class Player : MonoBehaviour
     Camera viewCamera;
     public PlayerController controller;
 
+    GunController _gunController;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
+        _gunController = GetComponent<GunController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Movement Input
         float horizontalInput = Input.GetAxisRaw("Horizontal");
 
         float verticalInput = Input.GetAxisRaw("Vertical");
@@ -32,6 +37,7 @@ public class Player : MonoBehaviour
 
         controller.Move(moveVelocity);
         
+        // Camera/Look Input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
 
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -46,5 +52,12 @@ public class Player : MonoBehaviour
 
             controller.LookAt(point);
         }
+        
+        // Weapon Input
+        if (Input.GetMouseButton(0))
+        {
+            _gunController.Shoot();
+        }
+        
     }
 }
