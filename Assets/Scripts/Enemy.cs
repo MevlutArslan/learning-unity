@@ -20,7 +20,9 @@ public class Enemy : MonoBehaviour
 
         StartCoroutine(UpdatePath());
     }
-
+    
+    
+    // This makes sure the pathfinding runs refreshRate times, instead of every frame
     IEnumerator UpdatePath()
     {
         float refreshRate = .25f;
