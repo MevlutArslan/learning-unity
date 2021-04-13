@@ -16,7 +16,7 @@ public class Player : Entity
     GunController _gunController;
 
     // Start is called before the first frame update
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         controller = GetComponent<PlayerController>();

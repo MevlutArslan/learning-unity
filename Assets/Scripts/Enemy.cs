@@ -12,7 +12,7 @@ public class Enemy : Entity
     // Player's location
     private Transform target;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         
@@ -32,8 +32,11 @@ public class Enemy : Entity
         while (target != null)
         {
             Vector3 targetPosition = new Vector3(target.position.x, 0, target.position.z);
-            pathFinder.SetDestination(targetPosition);
-            
+            if (!isDead)
+            {
+                pathFinder.SetDestination(targetPosition);
+
+            }
             yield return new WaitForSeconds(refreshRate);
         }
     }

@@ -7,9 +7,9 @@ public class Entity : MonoBehaviour, IDamageable
 {
     public float startingHealth;
     protected float health;
-    private bool isDead;
+    public bool isDead;
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         health = startingHealth;
     }
@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    protected void Die()
     {
         isDead = true;
         GameObject.Destroy(gameObject);

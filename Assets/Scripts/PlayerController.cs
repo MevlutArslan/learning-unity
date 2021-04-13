@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Executed at small regular steps
-    public void FixedUpdate()
+    private void FixedUpdate()
     {
         // Adds the velocity multiplied by the fixedinterval the FixedDeltaTime runs in
         // to the current position 
