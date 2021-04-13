@@ -17,10 +17,20 @@ public class Enemy : MonoBehaviour
         pathFinder = GetComponent<NavMeshAgent>();
         // Finds the player and assigns its location to target Transform
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        StartCoroutine(UpdatePath());
     }
 
-    private void Update()
+    IEnumerator UpdatePath()
     {
-        pathFinder.SetDestination(target.position);
+        float refreshRate = .25f;
+
+        while (target != null)
+        {
+            Vector3 targetPosition = new Vector3(target.position.x, 0, target.position.z);
+            pathFinder.SetDestination(targetPosition);
+            
+            yield return new WaitForSeconds(refreshRate);
+        }
     }
 }
