@@ -5,15 +5,17 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
     private NavMeshAgent pathFinder;
     
     // Player's location
     private Transform target;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+        
         pathFinder = GetComponent<NavMeshAgent>();
         // Finds the player and assigns its location to target Transform
         target = GameObject.FindGameObjectWithTag("Player").transform;
