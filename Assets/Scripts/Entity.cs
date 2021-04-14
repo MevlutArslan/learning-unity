@@ -8,6 +8,8 @@ public class Entity : MonoBehaviour, IDamageable
     public float startingHealth;
     protected float health;
     public bool isDead;
+    
+    public event System.Action OnDeath;
 
     protected virtual void Start()
     {
@@ -18,8 +20,6 @@ public class Entity : MonoBehaviour, IDamageable
     {
         health -= damage;
 
-        print(health);
-
         if (health <= 0 && !isDead)
         {
             Die();
@@ -29,6 +29,13 @@ public class Entity : MonoBehaviour, IDamageable
     protected void Die()
     {
         isDead = true;
+        
+        // No idea how this works.
+        if (OnDeath != null)
+        {
+            OnDeath();
+        }
+        
         GameObject.Destroy(gameObject);
     }
 }
